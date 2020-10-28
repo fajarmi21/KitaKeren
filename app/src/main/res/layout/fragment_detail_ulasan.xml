@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fba.fajarbahtera.kitakeren.fragment.DetailUlasanFragment">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/back"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ulasan Pengunjung"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/aqua"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.jackandphantom.circularimageview.RoundedImage
+                    android:id="@+id/PP"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentStart="true"
+                    app:rounded_radius="30"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/gb1"
+                    android:scaleType="centerCrop"/>
+
+                <ImageView
+                    android:id="@+id/btU"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@+id/numRU"
+                    android:layout_alignBottom="@+id/numRU"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toEndOf="@+id/numRU"
+                    android:background="@drawable/bintang" />
+
+                <TextView
+                    android:id="@+id/numRU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/JdUl"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_toEndOf="@+id/PP"
+                    tools:text="4.5"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/numCU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/btU"
+                    android:layout_alignBottom="@+id/btU"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toEndOf="@+id/btU"
+                    android:textSize="16sp"
+                    tools:text="(12 Ulasan)" />
+
+
+                <TextView
+                    android:id="@+id/JdUl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/PP"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_toEndOf="@+id/PP"
+                    tools:text="Judul Nya"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/btCerita"
+                        android:layout_alignBottom="@+id/btCerita"
+                        android:layout_marginBottom="0dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:layout_marginTop="0dp"
+                        android:text="Ceritakan Pengalaman Anda..."
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btCerita"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bt_uisquare"
+                        android:text="ceritakan" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUlasan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                tools:listitem="@layout/list_ulasan"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
