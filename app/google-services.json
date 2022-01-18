@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "246564271730",
+    "firebase_url": "https://kita-keren.firebaseio.com",
+    "project_id": "kita-keren",
+    "storage_bucket": "kita-keren.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246564271730:android:619297309cbd893a4574eb",
+        "android_client_info": {
+          "package_name": "fba.abadi.bahtera.fajar.kotlin.kitakeren"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246564271730-35dtcrcra06utf3f5debu2ngjskljf0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fba.abadi.bahtera.fajar.kotlin.kitakeren",
+            "certificate_hash": "34295e2e7db14aa956fd37ccfedba23560e57cf2"
+          }
+        },
+        {
+          "client_id": "246564271730-g6t5u245gsrh4k1vi154m9vm9d0031vj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fba.abadi.bahtera.fajar.kotlin.kitakeren",
+            "certificate_hash": "cc291e70576b206e51f25eebb3626e0e1e345094"
+          }
+        },
+        {
+          "client_id": "246564271730-97dgkgf4tl7vdqj307vr983fducetchr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnBGBM6dPyMnaKXehTF_PM7W1Pb3hKT5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246564271730-97dgkgf4tl7vdqj307vr983fducetchr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

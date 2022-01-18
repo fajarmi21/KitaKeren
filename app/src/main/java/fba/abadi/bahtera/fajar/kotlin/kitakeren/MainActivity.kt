@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.fragment.DashboardFragment
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.util.SaveSharedPreference.getLang
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.util.SaveSharedPreference.getPhoto
@@ -114,8 +118,8 @@ class MainActivity : AppCompatActivity() {
                 .notificationChannelId(CHANNEL_ID)
                 .title("notif")
                 .message(event.data)
-                .smallIcon(R.drawable.ic_launcher)
-                .largeIcon(R.drawable.ic_launcher)
+                .smallIcon(R.mipmap.ic_launcher)
+                .largeIcon(R.mipmap.ic_launcher)
                 .flags(Notification.DEFAULT_ALL)
                 .simple()
                 .build()
@@ -135,17 +139,34 @@ class MainActivity : AppCompatActivity() {
         txname.text = getname(this)
 
         loginAc.setOnClickListener {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
-            Auth.GoogleSignInApi.signOut(GoogleSignIn.getClient(this, gso).asGoogleApiClient()).setResultCallback {
-//                Log.e("status", it.status.statusMessage!!)
-                if (it.isSuccess) {
+            Firebase.auth.signOut()
+            GoogleSignIn.getClient(
+                this,
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.google_api))
+                    .requestEmail()
+                    .build()
+            ).signOut().addOnCompleteListener {
+                if (it.isSuccessful) {
                     logout(this)
                     startActivity(intentFor<LoginActivity>().clearTask().clearTop())
                     finish()
                 }
             }
+//            logout(this)
+//            startActivity(intentFor<LoginActivity>().clearTask().clearTop())
+//            finish()
+//            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build()
+//            Auth.GoogleSignInApi.signOut(GoogleSignIn.getClient(this, gso).asGoogleApiClient()).setResultCallback {
+////                Log.e("status", it.status.statusMessage!!)
+//                if (it.isSuccess) {
+//                    logout(this)
+//                    startActivity(intentFor<LoginActivity>().clearTask().clearTop())
+//                    finish()
+//                }
+//            }
         }
     }
 

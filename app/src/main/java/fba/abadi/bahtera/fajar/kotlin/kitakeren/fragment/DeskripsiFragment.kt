@@ -111,14 +111,14 @@ class DeskripsiFragment : Fragment() {
     }
 
     private fun button() {
-        binding.btnHomeDes.setOnClickListener {
-            val fragment = DashboardFragment()
-            activity!!.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame, fragment, fragment.javaClass.simpleName)
-                .disallowAddToBackStack()
-                .commit()
-        }
+//        binding.btnHomeDes.setOnClickListener {
+//            val fragment = DashboardFragment()
+//            activity!!.supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.frame, fragment, fragment.javaClass.simpleName)
+//                .disallowAddToBackStack()
+//                .commit()
+//        }
         binding.btnbackDes.setOnClickListener {
             getFragmentManager()!!.popBackStack()
         }
@@ -162,6 +162,7 @@ class DeskripsiFragment : Fragment() {
                 val fragment = DetailDeskripsiFragment()
                 val b = Bundle()
                 b.putString("DDes", dataDes[position].id_deskripsi)
+                b.putString("foto", dataDes[position].icon_deskripsi)
                 fragment.arguments = b
                 activity!!.supportFragmentManager
                     .beginTransaction()

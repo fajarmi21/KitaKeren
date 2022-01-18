@@ -16,26 +16,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <kr.docs.smartad.SmartAdBanner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:adv_AdOrder="Random"
-                app:adv_BannerSize="Small"
-                app:adv_FacebookID="YOUR_PLACEMENT_ID"
-                app:adv_GoogleID="YOUR_PLACEMENT_ID"
-                app:adv_IsAutoStart="true" />
+<!--            <kr.docs.smartad.SmartAdBanner-->
+<!--                android:id="@+id/mAd"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:adv_AdOrder="Google"-->
+<!--                app:adv_BannerSize="Rectangle"-->
+<!--                app:adv_IsAutoStart="true" />-->
         </RelativeLayout>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-2433285891162124/8484146052">
+        </com.google.android.gms.ads.AdView>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDashh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/list_dashboard"
-                android:layout_above="@id/rl2"/>
+                android:layout_above="@id/rl2"
+                tools:listitem="@layout/list_dashboard" />
             <RelativeLayout
                 android:id="@+id/rl2"
                 android:layout_width="match_parent"
@@ -60,42 +69,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/aqua"
-                                android:text="Informasi "
-                                android:textColor="@color/black"
-                                android:layout_marginStart="5dp"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:id="@+id/divider_super"
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginVertical="10dp"
-                                android:background="#C4BFBF" />
-
                             <LinearLayout
                                 android:id="@+id/link3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
                                 <TextView
+                                    android:id="@+id/judul_news"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
                                     android:fontFamily="@font/aqua"
-                                    android:text="Event 1000 Barong"
+                                    android:text="-"
                                     android:textColor="@color/black"
-                                    android:textSize="24sp" />
+                                    android:textSize="18sp" />
                                 <TextView
+                                    android:id="@+id/news"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/aqua"
                                     android:layout_marginStart="11dp"
-                                    android:text="Event 1000 Barong akan diadakan . . ."
+                                    android:text="-"
                                     android:textColor="@color/black"
                                     android:textSize="16sp"
                                     android:textStyle="italic" />

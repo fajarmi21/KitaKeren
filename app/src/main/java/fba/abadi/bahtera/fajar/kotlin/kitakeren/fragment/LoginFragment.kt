@@ -7,17 +7,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
-import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.MainActivity
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.R
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.network.BackEndApi
@@ -28,11 +29,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
+class LoginFragment : Fragment() {
     private val disposables = CompositeDisposable()
     private var googleApiClient: GoogleApiClient? = null
-    private val RC_SIGN_IN = 1
-    private lateinit var callbackManager : CallbackManager
+    private val RC_SIGN_IN = 0
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +45,7 @@ class LoginFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
 
     override fun onStart() {
         super.onStart()
-        callbackManager = CallbackManager.Factory.create()
-//        btnFacebook()
+        auth = Firebase.auth
         btnGoogle()
     }
 
@@ -54,104 +54,74 @@ class LoginFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
         disposables.clear()
     }
 
-//    private fun btnFacebook() {
-//        callbackManager = CallbackManager.Factory.create()
-//        LoginManager.getInstance().registerCallback(callbackManager,
-//            object: FacebookCallback<LoginResult> {
-//                override fun onSuccess(result: LoginResult?) {
-//                    Log.e("facebook sukses", result!!.accessToken.userId)
-//                }
-//
-//                override fun onCancel() {
-//                    TODO("Not yet implemented")
-//                }
-//
-//                override fun onError(error: FacebookException?) {
-//                    Log.e("facebook error", error!!.message!!)
-//                }
-//            })
-//        btnFacebook.setOnClickListener {
-//            LoginManager.getInstance().logInWithReadPermissions(activity, listOf("public_profile", "user_friends"))
-////            Auth.GoogleSignInApi.signOut(googleApiClient)
-//
-//        }
-//    }
-
     private fun btnGoogle() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.google_api))
             .requestEmail()
             .build()
         googleApiClient = GoogleApiClient.Builder(context!!)
-            .enableAutoManage(requireActivity(), this)
+            .enableAutoManage(requireActivity(), GoogleApiClient.OnConnectionFailedListener { })
             .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
             .build()
 
         btnGoogle.setOnClickListener {
-            Auth.GoogleSignInApi.signOut(googleApiClient)
 //            RxSocialLogin.login(PlatformType.GOOGLE)
             val intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
             startActivityForResult(intent, RC_SIGN_IN)
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            handleSignInResult(result!!)
-        }
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-    }
-
-    @SuppressLint("CheckResult")
-    private fun handleSignInResult(result: GoogleSignInResult) {
-        try {
-            if (result.isSuccess) {
-                Log.e("photo", result.signInAccount!!.photoUrl.toString())
-                setLoggedIn(
-                    context,
-                    true,
-                    result.signInAccount!!.displayName!!,
-                    result.signInAccount!!.email!!,
-                    result.signInAccount!!.photoUrl.toString()
-                )
-
-                val observable =
-                    WebServiceClient.client.create(BackEndApi::class.java).Login(
-                        result.signInAccount!!.displayName!!,
-                        result.signInAccount!!.email!!
-                    )
-                observable.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        startActivity(Intent(context, MainActivity::class.java))
-                        Log.e("sukses", it.message)
-                    }, {
-                        Log.e("gagal 1", it.message!!)
-                    })
-            } else {
-                Log.e("gagal 1", result.toString())
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+//                Log.d("tg", "firebaseAuthWithGoogle:" + account.id)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+                Log.w("tg", "Google sign in failed", e)
+                // ...
             }
-        } catch (e: Exception) {
-            Log.e("gagal 1", e.message.toString())
         }
-//        if (result.isSuccess) {
-//        } else {
-////            Toast.makeText(context, "Sign in cancel", Toast.LENGTH_LONG).show()
-//            Log.e("gagal 1", result.toString())
-//            Toast.makeText(context, result.toString(), Toast.LENGTH_LONG).show()
-//        }
     }
 
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.FrameLogin, fragment, fragment.javaClass.simpleName)
-            .disallowAddToBackStack()
-            .commit()
-    }
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(activity!!) { task ->
+                if (task.isSuccessful) {
+                    setLoggedIn(
+                        context,
+                        true,
+                        auth.currentUser!!.displayName!!,
+                        auth.currentUser!!.email!!,
+                        auth.currentUser!!.photoUrl.toString()
+                    )
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("Not yet implemented")
+                    val observable =
+                        WebServiceClient.client.create(BackEndApi::class.java).Login(
+                            auth.currentUser!!.displayName!!,
+                            auth.currentUser!!.email!!
+                        )
+                    observable.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(context, MainActivity::class.java))
+                            Log.e("sukses", it.message)
+                        }, {
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                            Log.e("gagal 1", it.message!!)
+                        })
+                } else {
+                    Toast.makeText(context, "Login Gagal", Toast.LENGTH_SHORT).show()
+                    Log.e("gagal 1", task.exception.toString())
+                }
+            }
     }
 }

@@ -11,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.iarcuschin.simpleratingbar.SimpleRatingBar
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
@@ -96,6 +98,17 @@ class DetailUlasanFragment : Fragment(), RatingDialogListener {
 
     @SuppressLint("CheckResult", "SetTextI18n")
     private fun data() {
+        if (arguments!!.get("foto").toString() != null) {
+            Glide.with(context!!)
+                    .load(WebServiceClient.http + "/" + arguments!!.get("foto").toString())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.PP)
+        } else {
+            Glide.with(context!!)
+                    .load(WebServiceClient.http + "/" + "public/assets/icon/logo.png")
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.PP)
+        }
         WebServiceClient.client.create(BackEndApi::class.java)
             .Ddes(arguments!!.get("idDash").toString())
             .subscribeOn(Schedulers.newThread())
@@ -162,11 +175,11 @@ class DetailUlasanFragment : Fragment(), RatingDialogListener {
     }
 
     override fun onNegativeButtonClicked() {
-        TODO("Not yet implemented")
+        data()
     }
 
     override fun onNeutralButtonClicked() {
-        TODO("Not yet implemented")
+        data()
     }
 
     @SuppressLint("CheckResult")

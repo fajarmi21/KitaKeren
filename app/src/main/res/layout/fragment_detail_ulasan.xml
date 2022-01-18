@@ -49,7 +49,6 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/gb1"
                     android:scaleType="centerCrop"/>
 
                 <ImageView

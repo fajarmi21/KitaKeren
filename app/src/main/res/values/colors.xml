@@ -24,4 +24,5 @@
     <color name="hintTextColor">#55000000</color>
 
     <color name="textcolor">#FF000000</color>
+    <color name="colorGrey">#2c373c</color>
 </resources>

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="fba.fajarbahtera.kitakeren.fragment.QuantityFragment"
+        android:background="#00000000">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PEMESANAN TIKET"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:fontFamily="@font/aqua"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/namaTiket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Tempat wisata"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:fontFamily="@font/aqua"
+            android:textColor="@color/black"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/CardPlhWkt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="20dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@color/descriptionTextColor">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Pilih Waktu"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#C4BFBF" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jam Siang (08:00 - 18:00)"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:layout_marginBottom="8dp">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/JamSDate"
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Picker"/>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/JamSTame"
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Time Picker"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jam Malam (18:00 - 22:00)"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:layout_marginBottom="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/JamMDate"
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Picker"/>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/JamMTime"
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Time Picker"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/CardJmlOrg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="20dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@color/descriptionTextColor">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/DateP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginStart="8dp"
+                                android:text="Time Picker"/>
+
+                            <TextView
+                                android:id="@+id/nameJO"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jumlah Orang"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#C4BFBF" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Dewasa"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numOD"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Orang"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.2.000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Anak-anak"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numOK"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Orang"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.1.000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/CardJmlKnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="60dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@color/descriptionTextColor">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Parkir Kendaraan"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#C4BFBF" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Motor"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numPMt"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Kendaraan"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.2.000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Mobil"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numPMb"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Kendaraan"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.2.000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bus Umum"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numPBU"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Kendaraan"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.2.000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bus Besar"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/aqua"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp">
+
+                                <com.github.guilhe.views.QuantityPickerView
+                                    android:id="@+id/numPBB"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="20dp"
+                                    app:textLabelFont="@font/permanentmarker_regular"
+                                    app:max="100"
+                                    app:isOpen="true"
+                                    android:visibility="visible"
+                                    app:textLabelFormatter="%s Kendaraan"
+                                    app:textLabelSize="14sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp.2.0000"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/aqua"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+<!--            <TextView-->
+<!--                android:id="@+id/tot"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/btnPesan"-->
+<!--                android:text="to"/>-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnPesan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                app:cardCornerRadius="20dp"
+                android:layout_alignParentBottom="true"
+                app:cardUseCompatPadding="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pesan Tiket"
+                    android:layout_marginTop="8dp"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/aqua"
+                    android:textColor="@color/white"/>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

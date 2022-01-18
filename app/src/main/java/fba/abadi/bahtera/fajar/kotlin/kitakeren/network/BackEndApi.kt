@@ -9,6 +9,9 @@ interface BackEndApi {
     @POST("home/index")
     fun dash(@Field("code") code: String): Observable<MutableList<dashboard>>
 
+    @GET("home/berita")
+    fun news(): Observable<MutableList<berita>>
+
     @FormUrlEncoded
     @POST("home/detailD")
     fun Ddash(@Field("id_dashboard") id_dashboard: String): Observable<MutableList<DDashboard>>

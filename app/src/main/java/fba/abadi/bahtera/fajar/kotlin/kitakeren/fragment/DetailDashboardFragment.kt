@@ -105,14 +105,14 @@ class DetailDashboardFragment : Fragment() {
     }
 
     private fun button() {
-        binding.btnHomeDD.setOnClickListener {
-            val fragment = DashboardFragment()
-            activity!!.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame, fragment, fragment.javaClass.simpleName)
-                .disallowAddToBackStack()
-                .commit()
-        }
+//        binding.btnHomeDD.setOnClickListener {
+//            val fragment = DashboardFragment()
+//            activity!!.supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.frame, fragment, fragment.javaClass.simpleName)
+//                .disallowAddToBackStack()
+//                .commit()
+//        }
         binding.btnbackDD.setOnClickListener {
             val fragment = DashboardFragment()
             activity!!.supportFragmentManager

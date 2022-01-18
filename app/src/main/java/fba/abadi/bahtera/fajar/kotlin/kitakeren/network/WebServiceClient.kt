@@ -13,7 +13,7 @@ object WebServiceClient {
     private lateinit var interceptor: HttpLoggingInterceptor
     private lateinit var okHttpClient: OkHttpClient
     private var retrofit: Retrofit? = null
-    val http = "https://kitakeren.fajarbahteraabadi.com"
+    val http = "https://kitakeren.kediritourism.kedirikota.go.id"
 
     var gson = GsonBuilder()
         .setLenient()

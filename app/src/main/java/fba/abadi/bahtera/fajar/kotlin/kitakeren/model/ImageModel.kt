@@ -1,5 +1,8 @@
 package fba.abadi.bahtera.fajar.kotlin.kitakeren.model
 
+import java.util.*
+import kotlin.collections.ArrayList
+
 class ImageModel {
 
     private var image_drawable: Int = 0
@@ -25,10 +28,10 @@ class DDeskripsi(
     val buka_detailDeskripsi: String,
     val pemandu_detailDeskripsi: String,
     val deskripsi_detailDeskripsi: language,
-    val foto_detailDeskripsi: language,
+    val foto_detailDeskripsi: ArrayList<String>,
     val nama_deskripsi: language
 )
-class berita(val news: String, val created_at: String, val updated_at: String)
+class berita(val judul_news: String, val news: String, val link: String, val created_at: String, val updated_at: String)
 class language(val ind: String, val en: String)
 class status(val status: String, val message: String)
 class rating(
@@ -51,4 +54,20 @@ class rating(
     val pemandu_detailDeskripsi: String,
     val deskripsi_detailDeskripsi: language,
     val foto_detailDeskripsi: language
+)
+class foto(
+    val id: List<Ds00011>
+)
+
+class Ds00011(
+    val initialPreview: List<String>,
+    val initialPreviewConfig: List<InitialPreviewConfig>
+)
+
+class InitialPreviewConfig(
+    val key: Int,
+    val caption: String,
+    val size: Int,
+    val downloadUrl: String,
+    val url: String
 )

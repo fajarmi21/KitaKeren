@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.R
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.databinding.FragmentDashboardBinding
 import fba.abadi.bahtera.fajar.kotlin.kitakeren.model.dashboard
@@ -28,6 +30,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kr.docs.smartad.SmartAd
 import technolifestyle.com.imageslider.FlipperLayout
 import technolifestyle.com.imageslider.FlipperView
 import technolifestyle.com.imageslider.pagetransformers.ZoomOutPageTransformer
@@ -71,11 +74,6 @@ class DashboardFragment : Fragment() {
                 "https://www.facebook.com/disbudparporakotakediri.official"
             )
         ) }
-        binding.link3.setOnClickListener { startActivity(
-            link.newWebsiteIntent(
-                "https://www.kediritourism.net/"
-            )
-        ) }
         binding.link4.setOnClickListener { startActivity(
             link.newWebsiteIntent(
                 "https://www.youtube.com/channel/UCk5z7OavRmGb4tddpA9N7xA"
@@ -97,6 +95,12 @@ class DashboardFragment : Fragment() {
                 "https://twitter.com/kediritourism?s=09"
             )
         ) }
+
+//        MobileAds.initialize(context) {}
+//        MobileAds.initialize(context, "ca-app-pub-2433285891162124~7732325257")
+//        val adRequest = AdRequest.Builder()
+//            .build()
+//        binding.adView.loadAd(adRequest)
     }
 
     override fun onStop() {
@@ -106,15 +110,39 @@ class DashboardFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun data() {
-        val observable =
-            WebServiceClient.client.create(BackEndApi::class.java).dash("1")
-        observable.subscribeOn(Schedulers.newThread())
+        WebServiceClient.client.create(BackEndApi::class.java).dash("1")
+            .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 var adapt = DashAdapter(it)
                 binding.rvDashh.apply {
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = adapt
+                }
+            }, {
+                Log.e("gagal 1", it.message!!)
+            })
+
+        WebServiceClient.client.create(BackEndApi::class.java).news()
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                it.forEach {x ->
+                    binding.judulNews.text = x.judul_news
+                    if (x.news.length >= 25) {
+                        binding.news.text = x.news.replaceRange(
+                                25,
+                                x.news.length,
+                                " ...."
+                        )
+                    } else {
+                        binding.news.text = x.news
+                    }
+                    binding.link3.setOnClickListener { startActivity(
+                            link.newWebsiteIntent(
+                                x.link
+                            )
+                    ) }
                 }
             }, {
                 Log.e("gagal 1", it.message!!)
@@ -138,9 +166,8 @@ class DashboardFragment : Fragment() {
         val channel = push().subscribe("my-channel")
         channel.bind("my-crud-dashboard") {
             Log.e("Pusher", "Received event with data: ${it.data}")
-            val observable =
-                WebServiceClient.client.create(BackEndApi::class.java).dash("1")
-            observable.subscribeOn(Schedulers.newThread())
+            WebServiceClient.client.create(BackEndApi::class.java).dash("1")
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
 //                        LANG = getLang(context)
@@ -148,6 +175,23 @@ class DashboardFragment : Fragment() {
                     binding.rvDashh.apply {
                         layoutManager = GridLayoutManager(context, 2)
                         adapter = adapt
+                    }
+                }, {
+                    Log.e("gagal 1", it.message!!)
+                })
+
+            WebServiceClient.client.create(BackEndApi::class.java).news()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    it.forEach {x ->
+                        binding.judulNews.text = x.judul_news
+                        binding.news.text = x.news
+                        binding.link3.setOnClickListener { startActivity(
+                                link.newWebsiteIntent(
+                                        x.link
+                                )
+                        ) }
                     }
                 }, {
                     Log.e("gagal 1", it.message!!)
